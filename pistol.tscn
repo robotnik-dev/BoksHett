@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://bmcits2dmj1nu"]
+
+[ext_resource type="Script" path="res://character/weapon.gd" id="1_ok2st"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_uqk6j"]
+
+[node name="Pistol" type="Node3D"]
+script = ExtResource("1_ok2st")
+max_ammo = 10
+_range = 50.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.199291, 0, 0, 0, 0.179112, 0, 0, 0, 0.386225, 0, 0.179966, -0.169168)
+mesh = SubResource("BoxMesh_uqk6j")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.199291, 0, 0, 0, -7.82923e-09, -0.386225, 0, 0.179112, -1.68824e-08, 0, 0.042056, 0)
+mesh = SubResource("BoxMesh_uqk6j")
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.170299, -0.285552)
+debug_shape_thickness = 5

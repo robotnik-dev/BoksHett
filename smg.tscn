@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://nxf5ialcqk8u"]
+
+[ext_resource type="Script" path="res://character/weapon.gd" id="1_wqo3u"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_opdqr"]
+
+[node name="SMG" type="Node3D"]
+transform = Transform3D(0.217652, 0, 0, 0, 0.127278, 0, 0, 0, 0.250249, 0, 0, 0)
+script = ExtResource("1_wqo3u")
+max_ammo = 100
+cooldown_time = 0.1
+damage = 2.64
+_range = 50.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.745945, 0, 0, 0, 1, 0, 0, 0, 0.500304, 0, 0.994993, 0)
+mesh = SubResource("CylinderMesh_opdqr")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.487081, 0, 0, 0, -7.94447e-08, 0.936898, 0, -1.81748, -4.09531e-08, 0, 1.61616, -1.09914)
+mesh = SubResource("CylinderMesh_opdqr")
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.58357, -2.79857)
+target_position = Vector3(0, -50, 0)
+
+[node name="Timer" type="Timer" parent="."]

@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://cx4ms35asg0jm"]
+
+[ext_resource type="Script" path="res://character/zomb.gd" id="1_fjsn6"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_rl26b"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_44o8e"]
+albedo_color = Color(0.866667, 0, 0.866667, 1)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4imu2"]
+
+[node name="Zomb" type="CharacterBody3D"]
+script = ExtResource("1_fjsn6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_rl26b")
+surface_material_override/0 = SubResource("StandardMaterial3D_44o8e")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_4imu2")
