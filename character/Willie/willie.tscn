@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dohepckxoqjfa"]
+
+[ext_resource type="PackedScene" uid="uid://g5p45jqg0kpj" path="res://character/Willie/willie_mesh.tscn" id="1_13wxt"]
+
+[node name="Willie" type="CharacterBody3D"]
+
+[node name="WillieMesh" parent="." instance=ExtResource("1_13wxt")]

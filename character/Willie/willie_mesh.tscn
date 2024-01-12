@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://g5p45jqg0kpj"]
+
+[ext_resource type="PackedScene" uid="uid://1pre33kp6dft" path="res://assets/models/willie.gltf" id="1_2b0up"]
+
+[node name="WillieMesh" instance=ExtResource("1_2b0up")]
