@@ -1,7 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://yrywqttnycfb"]
+[gd_scene load_steps=8 format=3 uid="uid://yrywqttnycfb"]
 
 [ext_resource type="Script" path="res://character/player.gd" id="1_dsmbo"]
+[ext_resource type="Script" path="res://character/weapon_slot.gd" id="2_3g2c8"]
 [ext_resource type="PackedScene" uid="uid://nxf5ialcqk8u" path="res://smg.tscn" id="2_kt4e2"]
+[ext_resource type="PackedScene" uid="uid://bmcits2dmj1nu" path="res://pistol.tscn" id="4_33r66"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_t2wet"]
 
@@ -10,6 +12,8 @@
 [sub_resource type="BoxMesh" id="BoxMesh_2i6ep"]
 
 [node name="Player" type="CharacterBody3D"]
+collision_layer = 2
+collision_mask = 7
 script = ExtResource("1_dsmbo")
 speed = 500.0
 
@@ -25,5 +29,9 @@ mesh = SubResource("BoxMesh_2i6ep")
 
 [node name="WeaponSlot" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.60882, -1.19209e-07, -0.359704)
+script = ExtResource("2_3g2c8")
+
+[node name="Pistol" parent="WeaponSlot" instance=ExtResource("4_33r66")]
 
 [node name="SMG" parent="WeaponSlot" instance=ExtResource("2_kt4e2")]
+visible = false

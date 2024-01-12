@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://cx4ms35asg0jm"]
+[gd_scene load_steps=8 format=3 uid="uid://cx4ms35asg0jm"]
 
 [ext_resource type="Script" path="res://character/zomb.gd" id="1_fjsn6"]
 
@@ -9,7 +9,18 @@ albedo_color = Color(0.866667, 0, 0.866667, 1)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4imu2"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2k45a"]
+albedo_color = Color(0.866667, 0, 0.866667, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_7v8lh"]
+material = SubResource("StandardMaterial3D_2k45a")
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6alem"]
+radius = 0.6
+
 [node name="Zomb" type="CharacterBody3D"]
+collision_layer = 4
+collision_mask = 7
 script = ExtResource("1_fjsn6")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
@@ -18,3 +29,17 @@ surface_material_override/0 = SubResource("StandardMaterial3D_44o8e")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_4imu2")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.376307, 0, 0, 0, 0.407883, 0, 0, 0, 0.49051, 0, 0.482884, -0.670451)
+mesh = SubResource("SphereMesh_7v8lh")
+
+[node name="HitBox" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitBox"]
+shape = SubResource("CapsuleShape3D_6alem")
+
+[connection signal="body_entered" from="HitBox" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="HitBox" to="." method="_on_hit_box_body_exited"]

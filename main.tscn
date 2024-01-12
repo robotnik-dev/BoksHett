@@ -1,7 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://6svbwxg70cvi"]
+[gd_scene load_steps=9 format=3 uid="uid://6svbwxg70cvi"]
 
 [ext_resource type="PackedScene" uid="uid://yrywqttnycfb" path="res://character/player.tscn" id="1_gig04"]
-[ext_resource type="PackedScene" uid="uid://cx4ms35asg0jm" path="res://character/zomb.tscn" id="2_l85mn"]
+[ext_resource type="PackedScene" uid="uid://dhs7by0of041w" path="res://enemy_spawner.tscn" id="3_2866y"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_yobgu"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -18,6 +18,11 @@ glow_enabled = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_0w2rn"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qcbq4"]
+albedo_color = Color(0.298039, 0.298039, 0.298039, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_mrjfl"]
+
 [node name="Main" type="Node"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -27,16 +32,58 @@ environment = SubResource("Environment_wsaew")
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
 shadow_enabled = true
 
-[node name="CSGMesh3D" type="CSGMesh3D" parent="."]
-transform = Transform3D(32.6508, 0, 0, 0, 1, 0, 0, 0, 28.5694, 0, 0, 0)
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.75471, 0.656059, 0, -0.656059, 0.75471, 0.00247812, 24.3702, 27.8231)
+projection = 1
+fov = 36.5
+size = 25.559
+
+[node name="Player" parent="." groups=["player"] instance=ExtResource("1_gig04")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.02204, 1.57971, 7.76064)
+
+[node name="EnemySpawner" parent="." instance=ExtResource("3_2866y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.1455, 1.432, -11.3392)
+
+[node name="Arena" type="Node3D" parent="."]
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="Arena"]
+transform = Transform3D(41.612, 0, 0, 0, 1, 0, 0, 0, 38.679, 1, 0, 0)
 use_collision = true
 mesh = SubResource("BoxMesh_0w2rn")
+material = SubResource("StandardMaterial3D_qcbq4")
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.916754, 0.399453, 0, -0.399453, 0.916754, 0.175, 11.053, 23.625)
+[node name="CSGMesh3D2" type="CSGMesh3D" parent="Arena"]
+transform = Transform3D(43, 0, 0, 0, 1, 0, 0, 0, 12.004, 43.394, 0, 0)
+use_collision = true
+mesh = SubResource("BoxMesh_mrjfl")
+material = SubResource("StandardMaterial3D_qcbq4")
 
-[node name="Player" parent="." instance=ExtResource("1_gig04")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.57971, 0)
+[node name="CSGMesh3D3" type="CSGMesh3D" parent="Arena"]
+transform = Transform3D(43, 0, 0, 0, -1.49012e-08, 5.91274, 0, -1, 0, 43.394, 3, 6.08285)
+use_collision = true
+mesh = SubResource("BoxMesh_mrjfl")
+material = SubResource("StandardMaterial3D_qcbq4")
 
-[node name="Zomb" parent="." instance=ExtResource("2_l85mn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.55168, 1.68668, 0)
+[node name="CSGMesh3D6" type="CSGMesh3D" parent="Arena"]
+transform = Transform3D(5.93262e-07, -1, -1.78943e-16, -3.07455e-15, -1.49012e-08, 5.91274, -13.3747, 0, -1.35921e-15, 22.2193, 3, 13.1836)
+use_collision = true
+mesh = SubResource("BoxMesh_mrjfl")
+material = SubResource("StandardMaterial3D_qcbq4")
+
+[node name="CSGMesh3D7" type="CSGMesh3D" parent="Arena"]
+transform = Transform3D(5.93262e-07, -1, -1.78943e-16, -3.07455e-15, -1.49012e-08, 5.91274, -13.3747, 0, -1.35921e-15, 22.2193, 3, -12.8164)
+use_collision = true
+mesh = SubResource("BoxMesh_mrjfl")
+material = SubResource("StandardMaterial3D_qcbq4")
+
+[node name="CSGMesh3D4" type="CSGMesh3D" parent="Arena"]
+transform = Transform3D(43, 0, 0, 0, -1.49012e-08, 5.91274, 0, -1, 0, 43.394, 3, -5.91715)
+use_collision = true
+mesh = SubResource("BoxMesh_mrjfl")
+material = SubResource("StandardMaterial3D_qcbq4")
+
+[node name="CSGMesh3D5" type="CSGMesh3D" parent="Arena"]
+transform = Transform3D(43, 0, 0, 0, -1.49012e-08, 2.3651, 0, -1, 0, 0.394001, 1, 19.0828)
+use_collision = true
+mesh = SubResource("BoxMesh_mrjfl")
+material = SubResource("StandardMaterial3D_qcbq4")

@@ -37,7 +37,7 @@ func shoot() -> void:
 		# in the same frequency as cooldown timer (NO SPAM)
 		return
 	
-	print("shoot")
+	print("shoot" + name)
 	# reduce ammo
 	current_ammo -= 1
 	# start cooldown

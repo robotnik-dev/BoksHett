@@ -1,9 +1,18 @@
 extends CharacterBody3D
+class_name Player
 
 @export var speed: float = 0.0
+@export var max_health: float = 10.0
+var current_health: float = 0.0:
+	set(value):
+		current_health = value
+		if current_health <= 0:
+			die()
 
 @onready var weapon_slot: Node3D = $WeaponSlot
 
+func _ready() -> void:
+	current_health = max_health
 
 func _physics_process(delta: float) -> void:
 	
@@ -26,5 +35,10 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	
 	if Input.is_action_pressed("shoot"):
-		if weapon_slot.get_child_count() > 0:
-			weapon_slot.get_child(0).shoot()
+		weapon_slot.shoot()
+
+func take_damage(damage: float) -> void:
+	current_health -= damage
+
+func die() -> void:
+	queue_free()
