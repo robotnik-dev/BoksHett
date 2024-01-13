@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://6svbwxg70cvi"]
+[gd_scene load_steps=10 format=3 uid="uid://6svbwxg70cvi"]
 
 [ext_resource type="PackedScene" uid="uid://yrywqttnycfb" path="res://character/player.tscn" id="1_gig04"]
+[ext_resource type="PackedScene" uid="uid://cm4vh56qhe8id" path="res://ui/combo_label.tscn" id="3_6ge4o"]
 [ext_resource type="PackedScene" uid="uid://dhs7by0of041w" path="res://systems/enemy_spawner.tscn" id="3_2866y"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_yobgu"]
@@ -23,7 +24,7 @@ albedo_color = Color(0.298039, 0.298039, 0.298039, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_mrjfl"]
 
-[node name="Main" type="Node"]
+[node name="Main" type="Node" groups=["main"]]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_wsaew")
@@ -48,7 +49,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.1455, 1.432, -11.3392)
 [node name="Arena" type="Node3D" parent="."]
 
 [node name="CSGMesh3D" type="CSGMesh3D" parent="Arena"]
-transform = Transform3D(41.612, 0, 0, 0, 1, 0, 0, 0, 38.679, 1, 0, 0)
+transform = Transform3D(44.862, 0, 0, 0, 1.078, 0, 0, 0, 41.7, -0.27, 0, 0)
 use_collision = true
 mesh = SubResource("BoxMesh_0w2rn")
 material = SubResource("StandardMaterial3D_qcbq4")
@@ -88,3 +89,16 @@ transform = Transform3D(43, 0, 0, 0, -1.49012e-08, 2.3651, 0, -1, 0, 0.394001, 1
 use_collision = true
 mesh = SubResource("BoxMesh_mrjfl")
 material = SubResource("StandardMaterial3D_qcbq4")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ComboLabel" parent="CanvasLayer/MarginContainer" instance=ExtResource("3_6ge4o")]
+layout_mode = 2
+text = "x1"

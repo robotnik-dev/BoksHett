@@ -6,6 +6,13 @@ class_name Weapon
 @export var damage: float = 1.0
 @export var raycast: bool = true
 @export var _range: float = 0.0
+@export var weapon_type: WeaponType = WeaponType.PISTOL
+
+enum WeaponType {
+	PISTOL = 0,
+	SMG = 1
+}
+
 
 var current_ammo: int = 0
 var raycast_node: RayCast3D
@@ -21,7 +28,7 @@ func _ready() -> void:
 	cooldown_timer.one_shot = true
 	add_child(cooldown_timer)
 	#cooldown_timer.timeout.connect(_on_cooldown_timer_timeout)
-	current_ammo = max_ammo
+	replenish_ammo()
 	
 	raycast_node.target_position.y = -_range
 
@@ -54,5 +61,5 @@ func shoot() -> void:
 			if colliding_object.has_method("take_weapon_damage"):
 				colliding_object.take_weapon_damage(damage)
 
-#func _on_cooldown_timer_timeout() -> void:
-	#pass
+func replenish_ammo() -> void:
+	current_ammo = max_ammo

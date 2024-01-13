@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://cm4vh56qhe8id"]
+
+[ext_resource type="Script" path="res://ui/combo_label.gd" id="1_osrld"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_1jy8w"]
+
+[node name="ComboLabel" type="Label"]
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "x1"
+label_settings = SubResource("LabelSettings_1jy8w")
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("1_osrld")

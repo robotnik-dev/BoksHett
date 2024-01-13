@@ -15,6 +15,12 @@ run/main_scene="res://main.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Upgrades="*res://systems/upgrades.gd"
+PlayerInfo="*res://systems/PlayerInfo.gd"
+Signals="*res://systems/signals.gd"
+
 [input]
 
 move_right={

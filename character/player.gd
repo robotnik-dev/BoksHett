@@ -9,10 +9,15 @@ var current_health: float = 0.0:
 		if current_health <= 0:
 			die()
 
-@onready var weapon_slot: Node3D = $WeaponSlot
+@onready var weapon_slot: WeaponSlot = $WeaponSlot
 
 func _ready() -> void:
 	current_health = max_health
+
+
+#func _unhandled_input(event: InputEvent) -> void:
+	#if event.is_action_pressed("ui_cancel"):
+		#PlayerInfo.activate_weapon(Weapon.WeaponType.SMG)
 
 func _physics_process(delta: float) -> void:
 	
@@ -36,6 +41,9 @@ func _physics_process(delta: float) -> void:
 	
 	if Input.is_action_pressed("shoot"):
 		weapon_slot.shoot()
+
+func ammopack_collected(weapon_type: Weapon.WeaponType) -> void:
+	weapon_slot.add_ammo_or_weapon(weapon_type)
 
 func take_damage(damage: float) -> void:
 	current_health -= damage

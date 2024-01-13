@@ -28,3 +28,21 @@ func equip_weapon() -> void:
 	equiped_weapon.hide()
 	equiped_weapon = get_child(weapon_idx)
 	equiped_weapon.show()
+
+func add_ammo_or_weapon(weapon_type: Weapon.WeaponType) -> void:
+	# add ammo if weapon exists
+	for weapon in get_children():
+		weapon = weapon as Weapon
+		if weapon.weapon_type == weapon_type:
+			weapon.replenish_ammo()
+			return
+	
+	# when no weapon of this type exists
+	var weapon_scene: PackedScene = PlayerInfo.all_weapons_on_disk.get(weapon_type)
+	if not weapon_scene:
+		printerr("forgot to add weapon to dict??")
+	
+	var new_weapon = weapon_scene.instantiate()
+	# FIXME: originally weapons are sorted (pistol first then smg etc)
+	add_child(new_weapon)
+	new_weapon.hide()
