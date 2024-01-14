@@ -18,7 +18,7 @@ var current_combo_multiplier: int = 1:
 		multiplier_decrease_time_changed.emit(multiplier_decrease_time)
 		
 		# check for new upgrade
-		var upgrade: String = lut_upgrades.upgrade_dictionary.get(3)
+		var upgrade = lut_upgrades.upgrade_dictionary.get(current_combo_multiplier)
 		if upgrade:
 			# check if already activated
 			if upgrade in activated_upgrades:
