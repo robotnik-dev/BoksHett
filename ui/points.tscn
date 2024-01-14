@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://r0dhkdlqk71o"]
+
+[ext_resource type="Script" path="res://ui/points.gd" id="1_xesm2"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_fo71k"]
+
+[node name="Points" type="Label"]
+text = "000000000000"
+label_settings = SubResource("LabelSettings_fo71k")
+horizontal_alignment = 1
+script = ExtResource("1_xesm2")

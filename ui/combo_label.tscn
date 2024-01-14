@@ -2,13 +2,26 @@
 
 [ext_resource type="Script" path="res://ui/combo_label.gd" id="1_osrld"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_1jy8w"]
+[sub_resource type="LabelSettings" id="LabelSettings_jdhls"]
 
-[node name="ComboLabel" type="Label"]
+[node name="ComboLabel" type="MarginContainer" node_paths=PackedStringArray("combo_multiplier", "progress")]
 size_flags_horizontal = 0
 size_flags_vertical = 0
+script = ExtResource("1_osrld")
+combo_multiplier = NodePath("VBoxContainer/ComboMultiplier")
+progress = NodePath("VBoxContainer/ProgressBar")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="ComboMultiplier" type="Label" parent="VBoxContainer"]
+layout_mode = 2
 text = "x1"
-label_settings = SubResource("LabelSettings_1jy8w")
+label_settings = SubResource("LabelSettings_jdhls")
 horizontal_alignment = 1
 vertical_alignment = 1
-script = ExtResource("1_osrld")
+
+[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer"]
+layout_mode = 2
+value = 100.0
+show_percentage = false

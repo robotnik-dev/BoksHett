@@ -17,8 +17,8 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-Upgrades="*res://systems/upgrades.gd"
-PlayerInfo="*res://systems/PlayerInfo.gd"
+PointSystem="*res://systems/point_system.gd"
+PlayerInfo="*res://systems/player_info.gd"
 Signals="*res://systems/signals.gd"
 
 [input]

@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://6svbwxg70cvi"]
+[gd_scene load_steps=11 format=3 uid="uid://6svbwxg70cvi"]
 
 [ext_resource type="PackedScene" uid="uid://yrywqttnycfb" path="res://character/player.tscn" id="1_gig04"]
 [ext_resource type="PackedScene" uid="uid://cm4vh56qhe8id" path="res://ui/combo_label.tscn" id="3_6ge4o"]
+[ext_resource type="PackedScene" uid="uid://r0dhkdlqk71o" path="res://ui/points.tscn" id="3_25fr6"]
 [ext_resource type="PackedScene" uid="uid://dhs7by0of041w" path="res://systems/enemy_spawner.tscn" id="3_2866y"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_yobgu"]
@@ -90,15 +91,45 @@ use_collision = true
 mesh = SubResource("BoxMesh_mrjfl")
 material = SubResource("StandardMaterial3D_qcbq4")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="HUD" type="CanvasLayer" parent="."]
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+[node name="MarginContainer" type="MarginContainer" parent="HUD"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ComboLabel" parent="CanvasLayer/MarginContainer" instance=ExtResource("3_6ge4o")]
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/MarginContainer"]
 layout_mode = 2
-text = "x1"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="Control" type="Control" parent="HUD/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Points" parent="HUD/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" instance=ExtResource("3_25fr6")]
+layout_mode = 2
+
+[node name="ComboLabel" parent="HUD/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" instance=ExtResource("3_6ge4o")]
+layout_mode = 2
+size_flags_horizontal = 1
+size_flags_vertical = 3
+
+[node name="Control2" type="Control" parent="HUD/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="HUD/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="HUD/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8

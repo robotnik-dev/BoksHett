@@ -14,11 +14,6 @@ var current_health: float = 0.0:
 func _ready() -> void:
 	current_health = max_health
 
-
-#func _unhandled_input(event: InputEvent) -> void:
-	#if event.is_action_pressed("ui_cancel"):
-		#PlayerInfo.activate_weapon(Weapon.WeaponType.SMG)
-
 func _physics_process(delta: float) -> void:
 	
 	var direction: Vector3 = Vector3.ZERO

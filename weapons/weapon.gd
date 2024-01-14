@@ -2,15 +2,20 @@ extends Node3D
 class_name Weapon
 
 @export var max_ammo: int = 0
-@export var cooldown_time: float = 1.0
+@export var cooldown_time: float = 1.0:
+	set(value):
+		cooldown_time = value
+		if cooldown_timer:
+			cooldown_timer.wait_time = cooldown_time
+
 @export var damage: float = 1.0
 @export var raycast: bool = true
 @export var _range: float = 0.0
 @export var weapon_type: WeaponType = WeaponType.PISTOL
 
 enum WeaponType {
-	PISTOL = 0,
-	SMG = 1
+	PISTOL,
+	SMG
 }
 
 
@@ -31,6 +36,9 @@ func _ready() -> void:
 	replenish_ammo()
 	
 	raycast_node.target_position.y = -_range
+	
+	# add to group for point system to find this Node
+	add_to_group(WeaponType.find_key(weapon_type))
 
 func shoot() -> void:
 	# check if cooldown is on

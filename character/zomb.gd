@@ -6,7 +6,6 @@ class_name Enemy
 @export var speed: float = 100.0
 @export var attack_cooldown_time: float = 0.5
 @export var damage: float = 1.0
-@export var combo_multiplier_on_death: int = 1
 
 var ammopack_scene: PackedScene = preload("res://environment/ammopack.tscn")
 
@@ -59,7 +58,7 @@ func die() -> void:
 	get_tree().get_first_node_in_group("main").add_child(ammopack)
 	var random_weapon = PlayerInfo.get_random_from_activated_weapons()
 	ammopack.setup(random_weapon, global_position)
-	Signals.enemy_died.emit(combo_multiplier_on_death)
+	Signals.enemy_died.emit()
 	queue_free()
 
 

@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="LUTUpgrades" load_steps=2 format=3 uid="uid://cymekbdax6ri"]
+
+[ext_resource type="Script" path="res://resources/lut_upgrades.gd" id="1_daan3"]
+
+[resource]
+script = ExtResource("1_daan3")
+upgrade_dictionary = {
+3: "PistolFastFire"
+}

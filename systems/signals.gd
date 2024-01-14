@@ -1,3 +1,3 @@
 extends Node
 
-signal enemy_died(multiplier)
+signal enemy_died
