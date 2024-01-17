@@ -1,9 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://6svbwxg70cvi"]
+[gd_scene load_steps=12 format=3 uid="uid://6svbwxg70cvi"]
 
-[ext_resource type="PackedScene" uid="uid://yrywqttnycfb" path="res://character/player.tscn" id="1_gig04"]
 [ext_resource type="PackedScene" uid="uid://cm4vh56qhe8id" path="res://ui/combo_label.tscn" id="3_6ge4o"]
 [ext_resource type="PackedScene" uid="uid://r0dhkdlqk71o" path="res://ui/points.tscn" id="3_25fr6"]
 [ext_resource type="PackedScene" uid="uid://dhs7by0of041w" path="res://systems/enemy_spawner.tscn" id="3_2866y"]
+[ext_resource type="Script" path="res://systems/multiplayer.gd" id="4_ovoa8"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_yobgu"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -25,6 +25,8 @@ albedo_color = Color(0.298039, 0.298039, 0.298039, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_mrjfl"]
 
+[sub_resource type="CylinderMesh" id="CylinderMesh_qisx3"]
+
 [node name="Main" type="Node" groups=["main"]]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -40,12 +42,6 @@ projection = 1
 current = true
 fov = 36.5
 size = 25.559
-
-[node name="Player" parent="." groups=["player"] instance=ExtResource("1_gig04")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.02204, 1.57971, 7.76064)
-
-[node name="EnemySpawner" parent="." instance=ExtResource("3_2866y")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.1455, 1.432, -11.3392)
 
 [node name="Arena" type="Node3D" parent="."]
 
@@ -133,3 +129,30 @@ size_flags_vertical = 3
 [node name="HBoxContainer3" type="HBoxContainer" parent="HUD/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 8
+
+[node name="Multiplayer" type="Node" parent="." node_paths=PackedStringArray("player_spawns")]
+script = ExtResource("4_ovoa8")
+player_spawns = [NodePath("PlayerSpawn1"), NodePath("PlayerSpawn2"), NodePath("PlayerSpawn3"), NodePath("PlayerSpawn4")]
+
+[node name="PlayerSpawn1" type="MeshInstance3D" parent="Multiplayer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.6144, 1.71903, 15.6531)
+visible = false
+mesh = SubResource("CylinderMesh_qisx3")
+
+[node name="PlayerSpawn2" type="MeshInstance3D" parent="Multiplayer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.7426, 1.71903, 15.6531)
+visible = false
+mesh = SubResource("CylinderMesh_qisx3")
+
+[node name="PlayerSpawn3" type="MeshInstance3D" parent="Multiplayer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.6144, 1.71903, -15.3896)
+visible = false
+mesh = SubResource("CylinderMesh_qisx3")
+
+[node name="PlayerSpawn4" type="MeshInstance3D" parent="Multiplayer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.7286, 1.71903, -15.5645)
+visible = false
+mesh = SubResource("CylinderMesh_qisx3")
+
+[node name="EnemySpawner" parent="." instance=ExtResource("3_2866y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.125822, 1.432, -1.20769)

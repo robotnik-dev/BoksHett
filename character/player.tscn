@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://yrywqttnycfb"]
+[gd_scene load_steps=9 format=3 uid="uid://yrywqttnycfb"]
 
 [ext_resource type="Script" path="res://character/player.gd" id="1_dsmbo"]
 [ext_resource type="Script" path="res://weapons/weapon_slot.gd" id="2_py33v"]
@@ -9,9 +9,12 @@
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_8hyvr"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ia0bv"]
+resource_local_to_scene = true
+
 [sub_resource type="BoxMesh" id="BoxMesh_2i6ep"]
 
-[node name="Player" type="CharacterBody3D"]
+[node name="Player" type="CharacterBody3D" groups=["player"]]
 collision_layer = 2
 collision_mask = 7
 script = ExtResource("1_dsmbo")
@@ -25,6 +28,7 @@ mesh = SubResource("CapsuleMesh_8hyvr")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.24451, 0, 0, 0, 0.354019, 0, 0, 0, 1.32989, 0, 0.554416, -0.949022)
+material_override = SubResource("StandardMaterial3D_ia0bv")
 mesh = SubResource("BoxMesh_2i6ep")
 
 [node name="WeaponSlot" type="Node3D" parent="."]

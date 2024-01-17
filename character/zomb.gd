@@ -32,7 +32,7 @@ func _physics_process(delta: float) -> void:
 	
 	var direction: Vector3 = Vector3.ZERO
 	
-	var player: Player = get_tree().get_first_node_in_group("player")
+	var player: Player = _get_player()
 	direction = global_position.direction_to(player.global_position)
 	
 	if direction.length() > 0:
@@ -50,7 +50,7 @@ func _physics_process(delta: float) -> void:
 				player.take_damage(damage)
 				cooldown_timer.start()
 
-func take_weapon_damage(damage: float) -> void:
+func take_damage(damage: float) -> void:
 	current_health -= damage
 
 func die() -> void:
@@ -61,6 +61,9 @@ func die() -> void:
 	Signals.enemy_died.emit()
 	queue_free()
 
+## TODO: nearest player etc.
+func _get_player() -> Player:
+	return get_tree().get_first_node_in_group("player")
 
 func _on_area_3d_body_entered(body: Node3D) -> void:
 	player_in_reach = true

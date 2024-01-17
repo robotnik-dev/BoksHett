@@ -66,8 +66,8 @@ func shoot() -> void:
 	if raycast_node:
 		if raycast_node.is_colliding():
 			var colliding_object = raycast_node.get_collider()
-			if colliding_object.has_method("take_weapon_damage"):
-				colliding_object.take_weapon_damage(damage)
+			if colliding_object.has_method("take_damage"):
+				colliding_object.take_damage(damage)
 
 func replenish_ammo() -> void:
 	current_ammo = max_ammo

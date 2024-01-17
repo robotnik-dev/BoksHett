@@ -3,14 +3,16 @@ class_name WeaponSlot
 
 var equiped_weapon: Weapon
 var weapon_idx = 0
+var player: Player
 
 func _ready() -> void:
 	equiped_weapon = get_child(weapon_idx)
+	player = owner
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("next_weapon"):
+	if event.is_action_pressed(player._get_input_action("next_weapon")):
 		next()
-	elif event.is_action_pressed("previous_weapon"):
+	elif event.is_action_pressed(player._get_input_action("previous_weapon")):
 		previous()
 
 func shoot() -> void:
