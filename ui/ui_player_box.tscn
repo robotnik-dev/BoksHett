@@ -1,0 +1,37 @@
+[gd_scene load_steps=2 format=3 uid="uid://b84lqbsinat2k"]
+
+[ext_resource type="Script" path="res://ui/ui_player_box.gd" id="1_bqfc8"]
+
+[node name="UIPlayerBox" type="PanelContainer" node_paths=PackedStringArray("connect_controller_to_play_button", "player_name_label", "remove_button", "container")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+script = ExtResource("1_bqfc8")
+connect_controller_to_play_button = NodePath("ConnectControllerToPlayButton")
+player_name_label = NodePath("VBoxContainer/PlayerNameLabel")
+remove_button = NodePath("VBoxContainer/RemoveButton")
+container = NodePath("VBoxContainer")
+
+[node name="ConnectControllerToPlayButton" type="Button" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Connect Controller To Play"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 2
+
+[node name="PlayerNameLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+text = "Player 1"
+horizontal_alignment = 1
+
+[node name="RemoveButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+text = "Remove"

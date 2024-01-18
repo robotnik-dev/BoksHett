@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://6svbwxg70cvi"]
+[gd_scene load_steps=13 format=3 uid="uid://6svbwxg70cvi"]
 
 [ext_resource type="PackedScene" uid="uid://cm4vh56qhe8id" path="res://ui/combo_label.tscn" id="3_6ge4o"]
 [ext_resource type="PackedScene" uid="uid://r0dhkdlqk71o" path="res://ui/points.tscn" id="3_25fr6"]
 [ext_resource type="PackedScene" uid="uid://dhs7by0of041w" path="res://systems/enemy_spawner.tscn" id="3_2866y"]
+[ext_resource type="PackedScene" uid="uid://dls5e5r4v3tgh" path="res://ui/ui_lobby.tscn" id="3_bm0hk"]
 [ext_resource type="Script" path="res://systems/multiplayer.gd" id="4_ovoa8"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_yobgu"]
@@ -129,6 +130,10 @@ size_flags_vertical = 3
 [node name="HBoxContainer3" type="HBoxContainer" parent="HUD/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 8
+
+[node name="GUI" type="CanvasLayer" parent="."]
+
+[node name="UILobby" parent="GUI" instance=ExtResource("3_bm0hk")]
 
 [node name="Multiplayer" type="Node" parent="." node_paths=PackedStringArray("player_spawns")]
 script = ExtResource("4_ovoa8")

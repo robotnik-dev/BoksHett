@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=3 uid="uid://dls5e5r4v3tgh"]
+
+[ext_resource type="Script" path="res://ui/ui_lobby.gd" id="1_1jhkt"]
+[ext_resource type="PackedScene" uid="uid://b84lqbsinat2k" path="res://ui/ui_player_box.tscn" id="2_gh4qv"]
+
+[node name="UILobby" type="Control" node_paths=PackedStringArray("player_boxes")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1jhkt")
+player_boxes = [NodePath("MarginContainer/HBoxContainer/UIPlayerBox"), NodePath("MarginContainer/HBoxContainer/UIPlayerBox2"), NodePath("MarginContainer/HBoxContainer/UIPlayerBox3"), NodePath("MarginContainer/HBoxContainer/UIPlayerBox4")]
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="UIPlayerBox" parent="MarginContainer/HBoxContainer" instance=ExtResource("2_gh4qv")]
+layout_mode = 2
+
+[node name="UIPlayerBox2" parent="MarginContainer/HBoxContainer" instance=ExtResource("2_gh4qv")]
+layout_mode = 2
+
+[node name="UIPlayerBox3" parent="MarginContainer/HBoxContainer" instance=ExtResource("2_gh4qv")]
+layout_mode = 2
+
+[node name="UIPlayerBox4" parent="MarginContainer/HBoxContainer" instance=ExtResource("2_gh4qv")]
+layout_mode = 2

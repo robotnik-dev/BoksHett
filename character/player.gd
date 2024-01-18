@@ -1,6 +1,8 @@
 extends CharacterBody3D
 class_name Player
 
+signal health_depleted
+
 @export var player: int = 1
 @export var color: Color
 @export var speed: float = 0.0
@@ -9,7 +11,7 @@ var current_health: float = 0.0:
 	set(value):
 		current_health = value
 		if current_health <= 0:
-			die()
+			health_depleted.emit()
 
 @onready var weapon_slot: WeaponSlot = $WeaponSlot
 
@@ -44,11 +46,13 @@ func ammopack_collected(weapon_type: Weapon.WeaponType) -> void:
 	weapon_slot.add_ammo_or_weapon(weapon_type)
 
 func take_damage(damage: float) -> void:
-	print(damage)
 	current_health -= damage
 
+## gets called from parent (multiplayer)
 func die() -> void:
-	queue_free()
+	# play death anim
+	# etc.
+	print("player lies helpless on floor")
 
 func _get_input_action(original: String) -> String:
 	return original + str(player)
