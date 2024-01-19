@@ -61,9 +61,20 @@ func die() -> void:
 	Signals.enemy_died.emit()
 	queue_free()
 
-## TODO: nearest player etc.
+## nearest player etc.
 func _get_player() -> Player:
-	return get_tree().get_first_node_in_group("player")
+	return _get_nearest_player()
+
+func _get_nearest_player() -> Player:
+	var player_to_follow: Player
+	var minimum_distance: float = 99999.9
+	for player in get_tree().get_nodes_in_group("player"):
+		var distance = global_position.distance_squared_to(player.global_position)
+		if distance < minimum_distance:
+			minimum_distance = distance
+			player_to_follow = player
+	
+	return player_to_follow
 
 func _on_area_3d_body_entered(body: Node3D) -> void:
 	player_in_reach = true

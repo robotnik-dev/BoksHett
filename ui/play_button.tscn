@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://dcecpkskgguy8"]
+
+[ext_resource type="Script" path="res://ui/play_button.gd" id="1_dhqbh"]
+
+[node name="PlayButton" type="Button"]
+size_flags_horizontal = 4
+text = "PLAY"
+script = ExtResource("1_dhqbh")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

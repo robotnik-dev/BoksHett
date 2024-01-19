@@ -1,4 +1,5 @@
 extends Control
+class_name UILobby
 
 @export var player_boxes: Array[UIPlayerBox]
 

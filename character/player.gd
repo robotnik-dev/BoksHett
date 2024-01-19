@@ -3,7 +3,7 @@ class_name Player
 
 signal health_depleted
 
-@export var player: int = 1
+@export var id: int = 1
 @export var color: Color
 @export var speed: float = 0.0
 @export var max_health: float = 10.0
@@ -15,12 +15,22 @@ var current_health: float = 0.0:
 
 @onready var weapon_slot: WeaponSlot = $WeaponSlot
 
+func setup(_id: int, spawn_position: Vector3) -> void:
+	id = _id
+	global_position = spawn_position
+	print(str(id) + str(spawn_position))
+	# TODO
+	# invincible frames
+	# blink for duration (invincible duration)
+	set_physics_process(true)
+	
+
 func _ready() -> void:
 	current_health = max_health
 	$MeshInstance3D2.material_override.albedo_color = color
+	set_physics_process(false)
 
 func _physics_process(delta: float) -> void:
-	
 	var direction: Vector3 = Vector3.ZERO
 	
 	if Input.get_action_strength(_get_input_action("move_right")):
@@ -48,11 +58,12 @@ func ammopack_collected(weapon_type: Weapon.WeaponType) -> void:
 func take_damage(damage: float) -> void:
 	current_health -= damage
 
-## gets called from parent (multiplayer)
+## gets called from parent (multiplayer) when they are helpless
 func die() -> void:
+	set_physics_process(false)
 	# play death anim
 	# etc.
 	print("player lies helpless on floor")
 
 func _get_input_action(original: String) -> String:
-	return original + str(player)
+	return original + str(id)
