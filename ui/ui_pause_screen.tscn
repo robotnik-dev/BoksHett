@@ -1,0 +1,32 @@
+[gd_scene load_steps=2 format=3 uid="uid://pt3g56jialwb"]
+
+[ext_resource type="Script" path="res://ui/ui_pause_screen.gd" id="1_s2eq8"]
+
+[node name="UIPauseScreen" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_s2eq8")
+
+[node name="TabContainer" type="TabContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Upgrades" type="TabBar" parent="TabContainer"]
+layout_mode = 2
+
+[node name="Stats" type="TabBar" parent="TabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="Settings" type="TabBar" parent="TabContainer"]
+visible = false
+layout_mode = 2

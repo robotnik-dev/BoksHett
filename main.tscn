@@ -1,6 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://6svbwxg70cvi"]
+[gd_scene load_steps=15 format=3 uid="uid://6svbwxg70cvi"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_013pl"]
+[ext_resource type="PackedScene" uid="uid://pt3g56jialwb" path="res://ui/ui_pause_screen.tscn" id="3_2n0k6"]
 [ext_resource type="PackedScene" uid="uid://cm4vh56qhe8id" path="res://ui/combo_label.tscn" id="3_6ge4o"]
 [ext_resource type="PackedScene" uid="uid://r0dhkdlqk71o" path="res://ui/points.tscn" id="3_25fr6"]
 [ext_resource type="PackedScene" uid="uid://dhs7by0of041w" path="res://systems/enemy_spawner.tscn" id="3_2866y"]
@@ -29,18 +30,21 @@ albedo_color = Color(0.298039, 0.298039, 0.298039, 1)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_qisx3"]
 
-[node name="Main" type="Node" node_paths=PackedStringArray("ui_lobby", "hud", "enemy_spawner", "multiplayer_node") groups=["main"]]
+[node name="Main" type="Node" node_paths=PackedStringArray("ui_lobby", "hud", "enemy_spawner", "multiplayer_node", "ui_pause_screen") groups=["main"]]
 script = ExtResource("1_013pl")
 ui_lobby = NodePath("GUI/UILobby")
 hud = NodePath("HUD")
 enemy_spawner = NodePath("EnemySpawner")
 multiplayer_node = NodePath("Multiplayer")
+ui_pause_screen = NodePath("GUI/UIPauseScreen")
 
 [node name="Level" type="Node" parent="."]
 
 [node name="GUI" type="CanvasLayer" parent="."]
 
 [node name="UILobby" parent="GUI" instance=ExtResource("3_bm0hk")]
+
+[node name="UIPauseScreen" parent="GUI" instance=ExtResource("3_2n0k6")]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_wsaew")
@@ -50,9 +54,9 @@ transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75
 shadow_enabled = true
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.75471, 0.656059, 0, -0.656059, 0.75471, 0.00247812, 24.3702, 27.8231)
+transform = Transform3D(1, 0, 0, 0, 0.75471, 0.656059, 0, -0.656059, 0.75471, 0.002, 57.405, 68.618)
 projection = 1
-fov = 36.5
+fov = 18.2
 size = 25.559
 
 [node name="Arena" type="Node3D" parent="."]

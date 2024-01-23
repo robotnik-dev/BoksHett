@@ -4,6 +4,7 @@ extends Node
 @export var hud: CanvasLayer
 @export var enemy_spawner: EnemySpawner
 @export var multiplayer_node: Multiplayer
+@export var ui_pause_screen: UIPauseScreen
 
 func _ready() -> void:
 	Signals.play_button_pressed.connect(_on_play_button_pressed)

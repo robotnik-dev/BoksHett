@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 PointSystem="*res://systems/point_system.gd"
 PlayerInfo="*res://systems/player_info.gd"
 Signals="*res://systems/signals.gd"
+Line3D="*res://systems/line_3d.gd"
 
 [input]
 

@@ -7,6 +7,7 @@ var zomb_scene: PackedScene = preload("res://character/zomb.tscn")
 
 func start_waves() -> void:
 	spawn_timer.start()
+	#pass
 
 func spawn_zomb() -> void:
 	var zomb = zomb_scene.instantiate()

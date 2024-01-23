@@ -23,7 +23,6 @@ func setup(_id: int, spawn_position: Vector3) -> void:
 	# invincible frames
 	# blink for duration (invincible duration)
 	set_physics_process(true)
-	
 
 func _ready() -> void:
 	current_health = max_health

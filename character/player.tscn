@@ -1,8 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://yrywqttnycfb"]
+[gd_scene load_steps=8 format=3 uid="uid://yrywqttnycfb"]
 
 [ext_resource type="Script" path="res://character/player.gd" id="1_dsmbo"]
 [ext_resource type="Script" path="res://weapons/weapon_slot.gd" id="2_py33v"]
-[ext_resource type="PackedScene" uid="uid://nxf5ialcqk8u" path="res://weapons/smg.tscn" id="3_hb7wq"]
 [ext_resource type="PackedScene" uid="uid://bmcits2dmj1nu" path="res://weapons/pistol.tscn" id="4_33r66"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_t2wet"]
@@ -36,6 +35,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.60882, -1.19209e-07, -0.35
 script = ExtResource("2_py33v")
 
 [node name="Pistol" parent="WeaponSlot" instance=ExtResource("4_33r66")]
-
-[node name="SMG" parent="WeaponSlot" instance=ExtResource("3_hb7wq")]
-visible = false
