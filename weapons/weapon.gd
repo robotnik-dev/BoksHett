@@ -35,10 +35,28 @@ func _ready() -> void:
 	
 	# add to group for point system to find this Node
 	add_to_group(WeaponType.find_key(weapon_type))
+	
+	apply_activated_upgrades()
 
 ## virtual
 func shoot() -> void:
 	pass
+
+func apply_upgrade(upgrade: Upgrade) -> void:
+	add_child(upgrade)
+	upgrade.setup(self)
+
+## called when weapon is added to the weaponslot
+func apply_activated_upgrades() -> void:
+	# loop through all upgrades on PointSystem Global
+	for upgrade in PointSystem.all_upgrades:
+		# select only with same weapon type
+		if upgrade.weapon_type == weapon_type:
+			# if display name from upgrade in activated_upgrades then:
+			if upgrade.display_name in PointSystem.activated_upgrades:
+				# add child and setup
+				add_child(upgrade.duplicate())
+				upgrade.setup(self)
 
 func replenish_ammo() -> void:
 	current_ammo = max_ammo

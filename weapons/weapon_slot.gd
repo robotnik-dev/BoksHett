@@ -2,7 +2,20 @@ extends Node3D
 class_name WeaponSlot
 
 var equiped_weapon: Weapon
-var weapon_idx = 0
+var weapon_idx = 0:
+	set(value):
+		# get_child_count return number from 1 to max so deshalb die - 1
+		# get_child(idx) needs from 0 to max - 1
+		var maximum = get_child_count() - 1
+		# under 0 -> go to maximum
+		if value < 0:
+			weapon_idx = maximum
+		# over maximum -> go to 0
+		elif value > maximum:
+			weapon_idx = 0
+		else:
+			weapon_idx = value
+
 var player: Player
 
 func _ready() -> void:

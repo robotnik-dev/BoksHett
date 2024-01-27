@@ -38,7 +38,6 @@ func _input(event: InputEvent) -> void:
 	# check if player wtih device number is already connected -> return
 	for device_id in players_connected.keys():
 		if event.device == device_id:
-			print("device already connected")
 			return
 	
 	add_player_device(event.device)
@@ -74,7 +73,6 @@ func _on_player_health_depleted(dying_player: Player) -> void:
 
 ## only called when in lobby
 func add_player_device(device_id: int) -> void:
-	print("add device number: " + str(device_id))
 	# signal that new device added
 	Signals.new_player_device_added.emit(device_id)
 	
@@ -83,7 +81,6 @@ func add_player_device(device_id: int) -> void:
 
 ## create the real object in the world
 func spawn(player_id: int) -> void:
-	print("spawn player with player_id: " +str(player_id))
 	# instance player object
 	var new_player: Player = player_scene.instantiate()
 	add_child(new_player)
