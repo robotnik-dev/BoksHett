@@ -14,6 +14,7 @@ var cooldown_timer: Timer
 var player_in_reach: bool = false
 var player_to_hit: Player
 
+
 var current_health: float = 0.0:
 	set(value):
 		current_health = value
