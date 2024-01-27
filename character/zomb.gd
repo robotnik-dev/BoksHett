@@ -50,8 +50,8 @@ func _physics_process(delta: float) -> void:
 				player.take_damage(damage)
 				cooldown_timer.start()
 
-func take_damage(damage: float) -> void:
-	current_health -= damage
+func take_damage(_damage: float) -> void:
+	current_health -= _damage
 
 func die() -> void:
 	var ammopack = ammopack_scene.instantiate()
