@@ -18,7 +18,7 @@ var current_health: float = 0.0:
 func setup(_id: int, spawn_position: Vector3) -> void:
 	id = _id
 	global_position = spawn_position
-	print(str(id) + str(spawn_position))
+	
 	# TODO
 	# invincible frames
 	# blink for duration (invincible duration)

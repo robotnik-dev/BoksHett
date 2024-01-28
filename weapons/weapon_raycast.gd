@@ -16,7 +16,6 @@ func _ready() -> void:
 func shoot() -> void:
 	# check if cooldown is on
 	if cooldown_timer.time_left > 0:
-		#print("cooldown active")
 		return
 	
 	# check ammo
@@ -25,7 +24,6 @@ func shoot() -> void:
 		# in the same frequency as cooldown timer (NO SPAM)
 		return
 	
-	print("shoot" + name)
 	# reduce ammo
 	current_ammo -= 1
 	# start cooldown
