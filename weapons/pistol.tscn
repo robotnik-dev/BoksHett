@@ -4,9 +4,9 @@
 
 [sub_resource type="BoxMesh" id="BoxMesh_uqk6j"]
 
-[node name="Pistol" type="Node3D" node_paths=PackedStringArray("raycast_node")]
+[node name="Pistol" type="Node3D" node_paths=PackedStringArray("raycast_nodes")]
 script = ExtResource("1_kyb7r")
-raycast_node = NodePath("RayCast3D")
+raycast_nodes = [NodePath("RayCast3D")]
 _range = 50.0
 max_ammo = 10
 

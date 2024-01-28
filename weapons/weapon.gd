@@ -17,7 +17,8 @@ class_name Weapon
 
 enum WeaponType {
 	PISTOL,
-	SMG
+	SMG,
+	SHOTGUN
 }
 
 var current_ammo: int = 0
