@@ -51,6 +51,7 @@ var current_combo_multiplier: int = 1:
 			# when weapon
 			elif not is_weapon_upgrade:
 				 # TODO
+				# where dowe do ths f*cking shit
 				# Weapon as child to all players
 				# Weapons to actiavted_weapon, see Player_Info.gd
 				pass
