@@ -1,0 +1,89 @@
+[gd_scene load_steps=9 format=3 uid="uid://b18b3skpo27vd"]
+
+[ext_resource type="PackedScene" uid="uid://dhs7by0of041w" path="res://systems/enemy_spawner.tscn" id="1_63655"]
+[ext_resource type="Script" path="res://maps/level.gd" id="1_qky01"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_yobgu"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_lqcys"]
+sky_material = SubResource("ProceduralSkyMaterial_yobgu")
+
+[sub_resource type="Environment" id="Environment_wsaew"]
+background_mode = 2
+sky = SubResource("Sky_lqcys")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_0w2rn"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qcbq4"]
+albedo_color = Color(0.298039, 0.298039, 0.298039, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_mrjfl"]
+
+[node name="Level1" type="Node3D" node_paths=PackedStringArray("enemy_spawner")]
+script = ExtResource("1_qky01")
+enemy_spawner = NodePath("EnemySpawner")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.75471, 0.656059, 0, -0.656059, 0.75471, 0.002, 57.405, 68.618)
+projection = 1
+fov = 18.2
+size = 25.559
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_wsaew")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Arena" type="Node3D" parent="."]
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="Arena"]
+transform = Transform3D(44.862, 0, 0, 0, 1.078, 0, 0, 0, 41.7, -0.27, 0, 0)
+use_collision = true
+mesh = SubResource("BoxMesh_0w2rn")
+material = SubResource("StandardMaterial3D_qcbq4")
+
+[node name="CSGMesh3D2" type="CSGMesh3D" parent="Arena"]
+transform = Transform3D(43, 0, 0, 0, 1, 0, 0, 0, 12.004, 43.394, 0, 0)
+use_collision = true
+mesh = SubResource("BoxMesh_mrjfl")
+material = SubResource("StandardMaterial3D_qcbq4")
+
+[node name="CSGMesh3D3" type="CSGMesh3D" parent="Arena"]
+transform = Transform3D(43, 0, 0, 0, -1.49012e-08, 5.91274, 0, -1, 0, 43.394, 3, 6.08285)
+use_collision = true
+mesh = SubResource("BoxMesh_mrjfl")
+material = SubResource("StandardMaterial3D_qcbq4")
+
+[node name="CSGMesh3D6" type="CSGMesh3D" parent="Arena"]
+transform = Transform3D(5.93262e-07, -1, -1.78943e-16, -3.07455e-15, -1.49012e-08, 5.91274, -13.3747, 0, -1.35921e-15, 22.2193, 3, 13.1836)
+use_collision = true
+mesh = SubResource("BoxMesh_mrjfl")
+material = SubResource("StandardMaterial3D_qcbq4")
+
+[node name="CSGMesh3D7" type="CSGMesh3D" parent="Arena"]
+transform = Transform3D(5.93262e-07, -1, -1.78943e-16, -3.07455e-15, -1.49012e-08, 5.91274, -13.3747, 0, -1.35921e-15, 22.2193, 3, -12.8164)
+use_collision = true
+mesh = SubResource("BoxMesh_mrjfl")
+material = SubResource("StandardMaterial3D_qcbq4")
+
+[node name="CSGMesh3D4" type="CSGMesh3D" parent="Arena"]
+transform = Transform3D(43, 0, 0, 0, -1.49012e-08, 5.91274, 0, -1, 0, 43.394, 3, -5.91715)
+use_collision = true
+mesh = SubResource("BoxMesh_mrjfl")
+material = SubResource("StandardMaterial3D_qcbq4")
+
+[node name="CSGMesh3D5" type="CSGMesh3D" parent="Arena"]
+transform = Transform3D(43, 0, 0, 0, -1.49012e-08, 2.3651, 0, -1, 0, 0.394001, 1, 19.0828)
+use_collision = true
+mesh = SubResource("BoxMesh_mrjfl")
+material = SubResource("StandardMaterial3D_qcbq4")
+
+[node name="EnemySpawner" parent="." instance=ExtResource("1_63655")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.125822, 1.432, -1.20769)
+skeleton = NodePath("../..")
