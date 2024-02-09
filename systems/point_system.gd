@@ -3,6 +3,7 @@ extends Node
 signal current_combo_multiplier_changed(multiplier: int)
 signal current_points_changed(points: int)
 signal multiplier_decrease_time_changed(decrease_time: float)
+signal weapon_or_upgrade_activated(display_name: String)
 
 # look up dictionary for all upgrades {ComboMultiplier: Upgrade}
 var lut_upgrades: LUTUpgrades = preload("res://resources/first_upgrade_lut.tres")
@@ -18,25 +19,24 @@ var current_combo_multiplier: int = 1:
 		current_combo_multiplier_changed.emit(current_combo_multiplier)
 		multiplier_decrease_time_changed.emit(multiplier_decrease_time)
 		
-		
-		#FIXME: system change: player that get respawned own all upgrades but not all weapons
-		# so adding them to the weapons dont work if they do not own them yet (respawn delete all weapon)
 		# check for new upgrade
 		var upgrade_name = lut_upgrades.upgrade_dictionary.get(current_combo_multiplier)
 		
 		if upgrade_name:
+			var parsed_upgrade_name = _parse_display_name(upgrade_name)
 			# check if already activated
-			if upgrade_name in activated_upgrades:
+			if parsed_upgrade_name in activated_upgrades:
 				return
 			
-			# TODO: only weapon upgrades, make weapons also work
 			var weapon_upgrade_res
 			var is_weapon_upgrade: bool = false
 			for class_dict in ProjectSettings.get_global_class_list():
-				if class_dict.get("class") == upgrade_name:
-					# is weapon upgrade_name
+				if class_dict.get("class") == parsed_upgrade_name:
+					# is weapon parsed_upgrade_name
 					weapon_upgrade_res = load(class_dict.get("path"))
 					is_weapon_upgrade = true
+			
+			weapon_or_upgrade_activated.emit(upgrade_name)
 			
 			# only when weapon upgrade
 			if is_weapon_upgrade:
@@ -45,16 +45,27 @@ var current_combo_multiplier: int = 1:
 				for weapon in get_tree().get_nodes_in_group(Weapon.WeaponType.find_key(weapon_upgrade_res.new().weapon_type)):
 					var new_weapon_upgrade = weapon_upgrade_res.new()
 					weapon.apply_upgrade(new_weapon_upgrade)
-					# FIXME es wird gerade  sehr oft hinzugefügt (mind. 4x)
-					activated_upgrades.append(new_weapon_upgrade.display_name)
+					if not activated_upgrades.has(parsed_upgrade_name):
+						activated_upgrades.append(parsed_upgrade_name)
 			
 			# when weapon
 			elif not is_weapon_upgrade:
-				 # TODO
-				# where dowe do ths f*cking shit
-				# Weapon as child to all players
-				# Weapons to actiavted_weapon, see Player_Info.gd
-				pass
+				# find actual weapon string in WeaponType enum
+				for weapon_name in Weapon.WeaponType.keys():
+					weapon_name = str(weapon_name)
+					if weapon_name ==  parsed_upgrade_name.to_upper():
+						# get WeaponType back from string
+						var weapon_type = Weapon.WeaponType.get(weapon_name)
+						PlayerInfo.activate_weapon(weapon_type)
+						PlayerInfo.equip_weapon_to_all_players_alive(weapon_type)
+						activated_upgrades.append(parsed_upgrade_name)
+						break
+			else:
+				var err_msg: PackedStringArray = []
+				err_msg.append("Neither Weapon nor Upgrade. Big panic")
+				err_msg.append("Found with name: ")
+				err_msg.append(parsed_upgrade_name)
+				printerr(err_msg)
 
 ## maximaler multplier erreicht in diesem run ( fällt nicht)
 var max_combo_multiplier: int = 0
@@ -80,6 +91,23 @@ func add_all_upgrades_to_list() -> void:
 				all_upgrades.append(weapon_upgrade)
 				# FIXME: is not pretty
 				add_child(weapon_upgrade)
+
+func _parse_display_name(display_name: String) -> String:
+	var output: String = display_name
+	# when no "+" -> weapon
+	var idx = output.find("+")
+	if idx == -1:
+		# search for first ":" -> strip leerzeichen
+		# take the rest of the string
+		var colon_idx = output.find(":")
+		if colon_idx == -1:
+			printerr("nothing: found. Maybe bug")
+		else:
+			output = output.substr(colon_idx + 1).replace(" ", "")
+	else:
+		# when "+" -> upgrade
+		output = output.replace("+:", "").replace(" ","")
+	return output
 
 func _on_enemy_died() -> void:
 	# first: get points with old multiplier

@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://yrywqttnycfb"]
+[gd_scene load_steps=12 format=3 uid="uid://yrywqttnycfb"]
 
 [ext_resource type="Script" path="res://character/player.gd" id="1_dsmbo"]
 [ext_resource type="Script" path="res://weapons/weapon_slot.gd" id="2_py33v"]
-[ext_resource type="PackedScene" uid="uid://bmcits2dmj1nu" path="res://weapons/pistol.tscn" id="4_33r66"]
+[ext_resource type="PackedScene" uid="uid://btj28io3ai6di" path="res://ui/upgrade_notification.tscn" id="4_57hdg"]
+[ext_resource type="PackedScene" uid="uid://b2dp476ols2nu" path="res://ui/weapon_info.tscn" id="5_i0y0i"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_t2wet"]
 
@@ -12,6 +13,92 @@
 resource_local_to_scene = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_2i6ep"]
+
+[sub_resource type="Animation" id="Animation_anito"]
+resource_name = "upgrade_notify"
+length = 2.0
+step = 1.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UpgradeNotification:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(0.0853776, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 3.32476, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("UpgradeNotification:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(0.153893, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.101961, 0.788235, 0.239216, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("UpgradeNotification:transparency")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(0.435275, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_5hr2x"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UpgradeNotification:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("UpgradeNotification:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("UpgradeNotification:transparency")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yxotx"]
+_data = {
+"RESET": SubResource("Animation_5hr2x"),
+"upgrade_notify": SubResource("Animation_anito")
+}
 
 [node name="Player" type="CharacterBody3D" groups=["player"]]
 collision_layer = 2
@@ -27,11 +114,25 @@ mesh = SubResource("CapsuleMesh_8hyvr")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.24451, 0, 0, 0, 0.354019, 0, 0, 0, 1.32989, 0, 0.554416, -0.949022)
+visible = false
 material_override = SubResource("StandardMaterial3D_ia0bv")
 mesh = SubResource("BoxMesh_2i6ep")
 
 [node name="WeaponSlot" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.60882, -1.19209e-07, -0.359704)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.618914)
 script = ExtResource("2_py33v")
 
-[node name="Pistol" parent="WeaponSlot" instance=ExtResource("4_33r66")]
+[node name="UpgradeNotification" parent="." instance=ExtResource("4_57hdg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+transparency = 1.0
+modulate = Color(1, 1, 1, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_yxotx")
+}
+
+[node name="WeaponInfo" parent="." node_paths=PackedStringArray("weapon_slot") instance=ExtResource("5_i0y0i")]
+weapon_slot = NodePath("../WeaponSlot")
+
+[connection signal="child_entered_tree" from="WeaponSlot" to="WeaponSlot" method="_on_child_entered_tree"]

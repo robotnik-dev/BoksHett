@@ -4,14 +4,16 @@
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_opdqr"]
 
-[node name="SMG" type="Node3D" node_paths=PackedStringArray("raycast_node")]
+[node name="SMG" type="Node3D" node_paths=PackedStringArray("raycast_nodes")]
 transform = Transform3D(0.217652, 0, 0, 0, 0.127278, 0, 0, 0, 0.250249, 0, 0, 0)
 script = ExtResource("1_f58ix")
-raycast_node = NodePath("RayCast3D")
+raycast_nodes = [NodePath("RayCast3D")]
+_range = 75.0
+shooting_angle = 10.0
 weapon_type = 1
 max_ammo = 100
 cooldown_time = 0.1
-damage = 0.25
+damage = 0.8
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.745945, 0, 0, 0, 1, 0, 0, 0, 0.500304, 0, 0.994993, 0)
@@ -22,6 +24,7 @@ transform = Transform3D(0.487081, 0, 0, 0, -7.94447e-08, 0.936898, 0, -1.81748, 
 mesh = SubResource("CylinderMesh_opdqr")
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.58357, -2.79857)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.584, 0)
 target_position = Vector3(0, -50, 0)
 collision_mask = 4
+debug_shape_thickness = 5

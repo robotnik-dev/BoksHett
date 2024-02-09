@@ -3,7 +3,6 @@ class_name Multiplayer
 
 signal all_player_dead
 
-
 @export var player_spawns: Array[Node3D]
 
 const PLAYER_LIES_HELPLESS_ON_FLOOR_TIME: float = 3.0
@@ -41,6 +40,9 @@ func _input(event: InputEvent) -> void:
 			return
 	
 	add_player_device(event.device)
+
+func at_least_one_player_ready() -> bool:
+	return !players_connected.is_empty()
 
 func spawn_connected_players() -> void:
 	in_lobby = false
