@@ -8,7 +8,7 @@
 
 [node name="shotgun" type="Node3D" node_paths=PackedStringArray("raycast_nodes")]
 script = ExtResource("1_ae6ct")
-raycast_nodes = [NodePath("MeshInstance3D2/Node3D/RayCast3D"), NodePath("MeshInstance3D2/Node3D/RayCast3D2"), NodePath("MeshInstance3D2/Node3D/RayCast3D3")]
+raycast_nodes = [NodePath("Node3D/RayCast3D"), NodePath("Node3D/RayCast3D2"), NodePath("Node3D/RayCast3D3")]
 _range = 25.0
 weapon_type = 2
 max_ammo = 10
@@ -19,25 +19,25 @@ transform = Transform3D(0.615, 0, 0, 0, 0.615, 0, 0, 0, 0.615, 0, 0, 0)
 mesh = SubResource("BoxMesh_bqgxn")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.42, 0, 0, 0, 0.0083048, 0.419918, 0, -0.419918, 0.0083048, 0.00704527, 0.0240633, -0.493578)
+transform = Transform3D(0.42, 0, 0, 0, 0.00267606, 0.425547, 0, -0.13531, 0.00841612, 0.00704527, 0.0240633, -0.410199)
 mesh = SubResource("CylinderMesh_6ls6a")
 skeleton = NodePath("../MeshInstance3D")
 
-[node name="Node3D" type="Node3D" parent="MeshInstance3D2"]
-transform = Transform3D(1, 0, 0, 0, -0.999804, -0.0197733, 0, 0.0197733, -0.999804, -0.000649452, 0.920913, -0.0504898)
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(0.42, 0, 0, 0, -8.3819e-09, -0.42, 0, 0.42, -8.3819e-09, 0.007, 0, 0)
 
-[node name="RayCast3D" type="RayCast3D" parent="MeshInstance3D2/Node3D"]
+[node name="RayCast3D" type="RayCast3D" parent="Node3D"]
 target_position = Vector3(0, -5, 0)
 collision_mask = 6
 debug_shape_custom_color = Color(0.945098, 0, 0, 1)
 
-[node name="RayCast3D2" type="RayCast3D" parent="MeshInstance3D2/Node3D"]
+[node name="RayCast3D2" type="RayCast3D" parent="Node3D"]
 transform = Transform3D(0.956305, -0.292372, 0, 0.292372, 0.956305, 0, 0, 0, 1, 0, 0, 0)
 target_position = Vector3(0, -5, 0)
 collision_mask = 6
 debug_shape_custom_color = Color(0, 0, 0.905882, 1)
 
-[node name="RayCast3D3" type="RayCast3D" parent="MeshInstance3D2/Node3D"]
+[node name="RayCast3D3" type="RayCast3D" parent="Node3D"]
 transform = Transform3D(0.957924, 0.287023, 4.85883e-05, -0.287021, 0.957917, -0.00365454, -0.0010955, 0.00348682, 0.999993, 0, 0, 0)
 target_position = Vector3(0, -5, 0)
 collision_mask = 6

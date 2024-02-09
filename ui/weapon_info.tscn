@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://b2dp476ols2nu"]
+
+[ext_resource type="Script" path="res://ui/weapon_info.gd" id="1_x0aw2"]
+
+[node name="WeaponInfo" type="Label3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.72853e-06, 1.62296, 3.57628e-06)
+billboard = 1
+text = "Shotgun: [ 10 / 100 ]"
+font_size = 100
+script = ExtResource("1_x0aw2")

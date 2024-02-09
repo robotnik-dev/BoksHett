@@ -2,7 +2,12 @@ extends Node3D
 class_name Weapon
 
 @export_subgroup("SystemRelevant")
-@export var weapon_type: WeaponType = WeaponType.PISTOL
+@export var weapon_type: WeaponType = WeaponType.PISTOL:
+	set(value):
+		weapon_type = value
+		var key = WeaponType.find_key(weapon_type)
+		if key:
+			display_name = str(key)
 
 @export_subgroup("WeaponProperties")
 @export var max_ammo: int = 0
@@ -22,7 +27,7 @@ enum WeaponType {
 }
 
 var current_ammo: int = 0
-
+var display_name: String
 var cooldown_timer: Timer
 
 func _ready() -> void:
@@ -38,6 +43,8 @@ func _ready() -> void:
 	add_to_group(WeaponType.find_key(weapon_type))
 	
 	apply_activated_upgrades()
+	
+	self.weapon_type = weapon_type
 
 ## virtual
 func shoot() -> void:

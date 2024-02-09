@@ -13,6 +13,8 @@ var current_health: float = 0.0:
 		if current_health <= 0:
 			health_depleted.emit()
 
+var is_dying: bool = false
+
 @onready var weapon_slot: WeaponSlot = $WeaponSlot
 
 func setup(_id: int, spawn_position: Vector3) -> void:
@@ -28,6 +30,21 @@ func _ready() -> void:
 	current_health = max_health
 	$MeshInstance3D2.material_override.albedo_color = color
 	set_physics_process(false)
+	
+	# TODO: not inside player class
+	PointSystem.weapon_or_upgrade_activated.connect(_notify)
+	
+	weapon_slot.add_ammo_or_weapon(Weapon.WeaponType.PISTOL)
+	weapon_slot.equiped_weapon = weapon_slot.get_child(0)
+	weapon_slot.equip_weapon()
+
+# TODO: refine this
+func _notify(what: String) -> void:
+	$UpgradeNotification.text = what
+	var anim = $AnimationPlayer as AnimationPlayer
+	anim.play("upgrade_notify")
+	await anim.animation_finished
+	anim.play("RESET")
 
 func _physics_process(delta: float) -> void:
 	var direction: Vector3 = Vector3.ZERO
@@ -54,12 +71,16 @@ func _physics_process(delta: float) -> void:
 func ammopack_collected(weapon_type: Weapon.WeaponType) -> void:
 	weapon_slot.add_ammo_or_weapon(weapon_type)
 
+func equip_weapon(weapon_type: Weapon.WeaponType) -> void:
+	weapon_slot.add_ammo_or_weapon(weapon_type)
+
 func take_damage(damage: float) -> void:
 	current_health -= damage
 
 ## gets called from parent (multiplayer) when they are helpless
 func die() -> void:
 	set_physics_process(false)
+	is_dying = true
 	# play death anim
 	# etc.
 	print("player lies helpless on floor")

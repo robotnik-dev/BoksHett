@@ -20,6 +20,7 @@ world = NodePath("World")
 [node name="World" type="Node" parent="."]
 
 [node name="GUI" type="CanvasLayer" parent="."]
+layer = 100
 
 [node name="UILobby" parent="GUI" instance=ExtResource("3_bm0hk")]
 
