@@ -9,7 +9,6 @@ var display_weapon_name: String
 func _ready() -> void:
 	weapon_slot.ammo_changed.connect(_on_ammo_changed)
 	weapon_slot.current_weapon_changed.connect(_on_weapon_changed)
-	weapon_slot
 	_set_display_name()
 	
 

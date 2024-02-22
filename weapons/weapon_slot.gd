@@ -80,6 +80,7 @@ func add_ammo_or_weapon(weapon_type: Weapon.WeaponType) -> void:
 	new_weapon.hide()
 
 
+@warning_ignore("unused_parameter")
 func _on_child_entered_tree(node: Node) -> void:
 	# sorting of weapons
 	for child in get_children():
