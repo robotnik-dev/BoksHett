@@ -1,6 +1,6 @@
-[gd_scene load_steps=13 format=3 uid="uid://b18b3skpo27vd"]
+[gd_scene load_steps=13 format=3 uid="uid://yue0gg5imrv6"]
 
-[ext_resource type="Script" path="res://maps/level.gd" id="1_qky01"]
+[ext_resource type="Script" path="res://maps/level.gd" id="1_dxr75"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_yobgu"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -38,10 +38,10 @@ size = Vector3(1.37, 1, 1)
 [sub_resource type="BoxMesh" id="BoxMesh_w8w76"]
 size = Vector3(0.945, 1, 1)
 
-[node name="Level1" type="Node3D" node_paths=PackedStringArray("enemy_spawner_container")]
-script = ExtResource("1_qky01")
+[node name="Level2" type="Node3D" node_paths=PackedStringArray("enemy_spawner_container")]
+script = ExtResource("1_dxr75")
 enemy_spawner_container = NodePath("EnemySpawnerContainer")
-level = 1
+level = 2
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.75471, 0.656059, 0, -0.656059, 0.75471, -0.115, 24.165, 23.235)

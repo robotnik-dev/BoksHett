@@ -5,6 +5,9 @@ var zomb_scene: PackedScene = preload("res://character/zomb.tscn")
 
 @onready var spawn_timer: Timer = $SpawnTimer
 
+func setup(spawn_position) -> void:
+	global_position = spawn_position
+
 func start_waves() -> void:
 	spawn_timer.start()
 	#pass

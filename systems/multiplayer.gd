@@ -3,8 +3,6 @@ class_name Multiplayer
 
 signal all_player_dead
 
-@export var player_spawns: Array[Node3D]
-
 const PLAYER_LIES_HELPLESS_ON_FLOOR_TIME: float = 3.0
 const PLAYER_RESPAWN_TIME: float = 8.0
 
@@ -20,6 +18,15 @@ var players_connected: Dictionary
 var in_lobby: bool = true:
 	set(value):
 		in_lobby = value
+
+var current_level: int = 1
+
+func _ready() -> void:
+	# connect to signal from level
+	Signals.level_starts.connect(_on_level_start)
+
+func _on_level_start(level: int) -> void:
+	current_level = level
 
 func _input(event: InputEvent) -> void:
 	# when not in lobby, return
@@ -89,7 +96,17 @@ func spawn(player_id: int) -> void:
 	
 	# setup player (device id, global position, etc)
 	# assign the 'id' property of the player
-	new_player.setup(player_id, player_spawns[player_id - 1].global_position)
+	
+	# FIXME: maybe race contion with initialization order wth level???
+	print(current_level)
+	var data = Database.waves_databases[current_level - 1].get_array()
+	var spawn_position: Vector3
+	for item in data:
+		if item.name == "setup":
+			var spawn_positions: Array = item.player_spawner_positions
+			spawn_position = spawn_positions[player_id - 1]
+	
+	new_player.setup(player_id, spawn_position)
 	
 	# update player_alive
 	players_alive.append(new_player)
