@@ -1,7 +1,7 @@
 extends Node3D
 class_name AmmoPack
 
-## wid von zomb oder gegner gedropt und ist zufällige waffe / ammo aus liste
+## wid von zomb oder gegner gedropt und ist zufällige waffe oder ammo aus liste
 
 var weapon_type: Weapon.WeaponType
 
