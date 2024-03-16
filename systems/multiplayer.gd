@@ -98,7 +98,6 @@ func spawn(player_id: int) -> void:
 	# assign the 'id' property of the player
 	
 	# FIXME: maybe race contion with initialization order wth level???
-	print(current_level)
 	var data = Database.waves_databases[current_level - 1].get_array()
 	var spawn_position: Vector3
 	for item in data:
