@@ -1,0 +1,34 @@
+[gd_scene load_steps=3 format=3 uid="uid://bmiad170svmfm"]
+
+[ext_resource type="Script" path="res://ui/ui_main_menu.gd" id="1_kjaml"]
+[ext_resource type="PackedScene" uid="uid://xap1rv7rjryr" path="res://ui/ui_to_lobby_button.tscn" id="2_p5ecd"]
+
+[node name="UIMainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_kjaml")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 7
+text = "MAIN"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="UIToLobbyButton" parent="MarginContainer/VBoxContainer" instance=ExtResource("2_p5ecd")]
+layout_mode = 2

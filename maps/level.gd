@@ -7,7 +7,11 @@ class_name Level
 var enemy_spawner_scene: PackedScene = preload("res://systems/enemy_spawner.tscn")
 
 var enemy_spawners: Array[EnemySpawner] = []
-var current_wave: int = 1
+var current_wave: int = 1:
+	set(value):
+		current_wave = value
+		Signals.wave_changed.emit(current_wave)
+
 var timer = Timer.new()
 var enemy_spawners_with_no_enemies_alive: Array[EnemySpawner] = []
 
@@ -29,6 +33,7 @@ func _ready() -> void:
 	
 	# tell each enemy spawner that current wave should start with 
 	# number of enemies spawning
+	self.current_wave = current_wave
 	start_wave(current_wave)
 	
 	Signals.level_starts.emit(level)
@@ -73,7 +78,6 @@ func start_wave(wave: int) -> void:
 				enemy_spawner.start_wave(amount_of_enemies, amount_of_bosses)
 				
 				idx += 1
-	
 
 func _on_spawner_all_dead(enemy_spawner: EnemySpawner) -> void:
 	#print("SPAWNER: " + enemy_spawner.name + " NO ALIVE")
@@ -101,9 +105,18 @@ func wave_ended(wave: int) -> void:
 	# at the end, current_wave += 1
 	current_wave += 1
 	
-	# start new wave if current_wave is not maximum wave
-	# and is not triggered through timer
-	start_wave(current_wave)
+	var data = Database.waves_databases[level - 1].get_array()
+	var max_waves: int = 0
+	for item in data:
+		if item.name == "setup":
+			continue
+		max_waves += 1
 	
-	# else:
-	# TODO: WIN
+	if current_wave > max_waves :
+		Signals.level_won.emit()
+	
+	else:
+		# start new wave if current_wave is not maximum wave
+		# and is not triggered through timer
+		start_wave(current_wave)
+

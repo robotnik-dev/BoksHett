@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://djqgwydv6rvg6"]
+
+[ext_resource type="Script" path="res://ui/ui_back_to_menu_button.gd" id="1_ymhd3"]
+
+[node name="UIBackToMenuButton" type="Button"]
+custom_minimum_size = Vector2(75, 0)
+size_flags_horizontal = 7
+text = "Menu"
+script = ExtResource("1_ymhd3")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

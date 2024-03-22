@@ -70,13 +70,17 @@ var current_combo_multiplier: int = 1:
 ## maximaler multplier erreicht in diesem run ( fällt nicht)
 var max_combo_multiplier: int = 0
 
-var current_points: int = 0
+var current_points: int = 0:
+	set(value):
+		current_points = value
+		current_points_changed.emit(current_points)
 
 ## in seconds
 var multiplier_decrease_time: float = 3.0
 
 func _ready() -> void:
 	Signals.enemy_died.connect(_on_enemy_died)
+	Signals.level_starts.connect(_on_level_start)
 	
 	add_all_upgrades_to_list()
 
@@ -91,6 +95,12 @@ func add_all_upgrades_to_list() -> void:
 				all_upgrades.append(weapon_upgrade)
 				# FIXME: is not pretty
 				add_child(weapon_upgrade)
+
+func _on_level_start(level: int) -> void:
+	self.current_combo_multiplier = 1
+	max_combo_multiplier = 0
+	self.current_points = 0
+	activated_upgrades.clear()
 
 func _parse_display_name(display_name: String) -> String:
 	var output: String = display_name
@@ -114,8 +124,6 @@ func _on_enemy_died() -> void:
 	current_points += 100 * current_combo_multiplier
 	# raise combo multiplier
 	current_combo_multiplier += 1
-	# other stuff
-	current_points_changed.emit(current_points)
 
 func _calculate_new_decrease_time(_current_combo_multiplier: int) -> float:
 	return 3 * pow(exp(1), -(1.0/40.0) * _current_combo_multiplier)
