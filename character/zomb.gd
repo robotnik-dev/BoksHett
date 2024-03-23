@@ -1,6 +1,7 @@
 extends CharacterBody3D
 class_name Enemy
 
+signal died
 
 @export var max_health: float = 2.0
 @export var speed: float = 100.0
@@ -57,9 +58,12 @@ func take_damage(_damage: float) -> void:
 
 func die() -> void:
 	var ammopack = ammopack_scene.instantiate()
-	get_tree().get_first_node_in_group("main").add_child(ammopack)
+	get_tree().get_first_node_in_group("world").add_child(ammopack)
 	var random_weapon = PlayerInfo.get_random_from_activated_weapons()
 	ammopack.setup(random_weapon, global_position)
+	# this is for enemy_spawner to keep track of each enemy alive
+	died.emit()
+	# this is for ammopacks and point system stuff
 	Signals.enemy_died.emit()
 	queue_free()
 

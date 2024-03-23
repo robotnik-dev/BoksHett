@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://dtig0m3rlqic4"]
+
+[ext_resource type="Script" path="res://character/zomb.gd" id="1_7vs70"]
+[ext_resource type="PackedScene" uid="uid://g5p45jqg0kpj" path="res://character/Willie/willie_mesh.tscn" id="2_51hag"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4imu2"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6alem"]
+radius = 0.6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_snlqd"]
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.980392, 0, 0.980392, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_c2bef"]
+
+[node name="Boss" type="CharacterBody3D"]
+collision_layer = 4
+collision_mask = 7
+script = ExtResource("1_7vs70")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1.9, 0, 0, 0, 1.9, 0, 0, 0, 1.9, 0, 0.826808, 0)
+shape = SubResource("CapsuleShape3D_4imu2")
+
+[node name="HitBox" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitBox"]
+shape = SubResource("CapsuleShape3D_6alem")
+
+[node name="WillieMesh" parent="." instance=ExtResource("2_51hag")]
+transform = Transform3D(-1.695, 0, -2.55938e-07, 0, 1.695, 0, 2.55938e-07, 0, -1.695, 0, -1, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WillieMesh"]
+transform = Transform3D(0.48, 0, -1.44329e-14, 0, 0.48, 0, 2.13163e-14, 0, 0.325, -0.360524, 2.11266, -0.132208)
+material_override = SubResource("StandardMaterial3D_snlqd")
+mesh = SubResource("SphereMesh_c2bef")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="WillieMesh"]
+transform = Transform3D(0.48, 0, -1.92439e-14, 0, 0.48, 0, 2.84217e-14, 0, 0.325, 0.366209, 2.11266, -0.132208)
+material_override = SubResource("StandardMaterial3D_snlqd")
+mesh = SubResource("SphereMesh_c2bef")
+
+[connection signal="body_entered" from="HitBox" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="HitBox" to="." method="_on_hit_box_body_exited"]

@@ -7,7 +7,3 @@
 [node name="EnemySpawner" type="MeshInstance3D"]
 mesh = SubResource("BoxMesh_qit2w")
 script = ExtResource("1_tfnuf")
-
-[node name="SpawnTimer" type="Timer" parent="."]
-
-[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

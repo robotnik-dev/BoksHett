@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://itgcrfqoeovb"]
+
+[ext_resource type="Script" path="res://ui/ui_wave_label.gd" id="1_aitam"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_m8ood"]
+font_size = 24
+
+[node name="UIWaveLabel" type="Label"]
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "Wave: 0"
+label_settings = SubResource("LabelSettings_m8ood")
+horizontal_alignment = 2
+vertical_alignment = 1
+script = ExtResource("1_aitam")

@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://xap1rv7rjryr"]
+
+[ext_resource type="Script" path="res://ui/ui_to_lobby_button.gd" id="1_e2ws4"]
+
+[node name="UIToLobbyButton" type="Button"]
+size_flags_horizontal = 4
+size_flags_vertical = 2
+text = "Multiplayer"
+script = ExtResource("1_e2ws4")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

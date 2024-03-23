@@ -11,13 +11,16 @@ var player_scene: PackedScene = preload("res://character/player.tscn")
 var max_player_number: int = 4
 
 var players_alive: Array[Player]
+var all_tweens_active: Array
 
 # {device_id: player_id}
 var players_connected: Dictionary
 
-var in_lobby: bool = true:
+# FIXME: deprecated when game state 
+var in_lobby: bool = false:
 	set(value):
 		in_lobby = value
+		change_to_lobby()
 
 var current_level: int = 1
 
@@ -25,11 +28,19 @@ func _ready() -> void:
 	# connect to signal from level
 	Signals.level_starts.connect(_on_level_start)
 
+# FIXME: deprecated when game state
+func change_to_lobby() -> void:
+	for c in get_children():
+		c.queue_free()
+	for device_id in players_connected.keys():
+		Signals.show_connected_player_with.emit(device_id)
+
 func _on_level_start(level: int) -> void:
 	current_level = level
 
 func _input(event: InputEvent) -> void:
 	# when not in lobby, return
+	# TODO: game state in lobby
 	if not in_lobby:
 		return
 	
@@ -42,9 +53,14 @@ func _input(event: InputEvent) -> void:
 		return
 	
 	# check if player wtih device number is already connected -> return
+	#var this_device_connected: bool = false
 	for device_id in players_connected.keys():
 		if event.device == device_id:
 			return
+			#this_device_connected = true
+	
+	#if this_device_connected:
+		#return
 	
 	add_player_device(event.device)
 
@@ -69,21 +85,28 @@ func _on_player_health_depleted(dying_player: Player) -> void:
 	# FIXME: what happens if close to another dying
 	if players_alive.is_empty():
 		# 1. all dead -> game over
-		print("GAME OVER")
+		# stop all tween timers
+		for tween in all_tweens_active:
+			tween.kill()
+		all_tweens_active.clear()
 		all_player_dead.emit()
 	
 	else:
 		# 2. just one dead -> call respawn (with timer)
 		var tween  = get_tree().create_tween()
 		tween.tween_callback(remove_player_from_world.bind(dying_player)).set_delay(PLAYER_LIES_HELPLESS_ON_FLOOR_TIME)
+		tween.finished.connect(func(): all_tweens_active.erase(tween))
+		all_tweens_active.append(tween)
 		
 		var tween2  = get_tree().create_tween()
 		tween2.tween_callback(spawn.bind(dying_player.id)).set_delay(PLAYER_RESPAWN_TIME)
+		tween2.finished.connect(func(): all_tweens_active.erase(tween2))
+		all_tweens_active.append(tween2)
 
 ## only called when in lobby
 func add_player_device(device_id: int) -> void:
 	# signal that new device added
-	Signals.new_player_device_added.emit(device_id)
+	Signals.show_connected_player_with.emit(device_id)
 	
 	# create link in dict to player_id
 	players_connected[device_id] = device_id + 1
@@ -98,7 +121,6 @@ func spawn(player_id: int) -> void:
 	# assign the 'id' property of the player
 	
 	# FIXME: maybe race contion with initialization order wth level???
-	print(current_level)
 	var data = Database.waves_databases[current_level - 1].get_array()
 	var spawn_position: Vector3
 	for item in data:
